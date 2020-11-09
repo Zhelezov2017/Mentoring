@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: ${DATA_SOURCE_DRIVER}
+    url: ${DATA_SOURCE_URI}
+    password: ${DATA_SOURCE_PASSWORD}
+    username: ${DATA_SOURCE_USERNAME}
+    hikari:
+      maximum-pool-size: 5
+  jpa:
+    database: ORACLE
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: true
+com:
+  epam:
+    java:
+      trainings:
+        dataSourceDriver: ${DATA_SOURCE_DRIVER}
+        dataSourcePassword: ${DATA_SOURCE_PASSWORD}
+        dataSourceUrl: ${DATA_SOURCE_URI}
+        dataSourceUsername: ${DATA_SOURCE_USERNAME}

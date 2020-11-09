@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Vladislav_Zhelezov" id="create-tables-task-1">
+        <createTable tableName="USERS">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR2(255 CHAR)"/>
+            <column name="LAST_NAME" type="VARCHAR(255 CHAR)"/>
+            <column name="BIRTH_DATE" type="DATE"/>
+            <column name="VERSION" type="NUMBER(19, 0)"/>
+        </createTable>
+        <createTable tableName="POSTS">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USER_ID" type="NUMBER(19, 0)"/>
+            <column name="TEXT" type="VARCHAR(255 CHAR)"/>
+            <column name="TYPE_POST" type="VARCHAR(255 CHAR)"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </createTable>
+        <createTable tableName="USER_LIKE_MAPPING">
+            <column name="POST_ID" type="NUMBER(19, 0)"/>
+            <column name="LIKE_ID" type="NUMBER(19, 0)"/>
+            <column name="USER_ID" type="NUMBER(19, 0)"/>
+        </createTable>
+        <createTable tableName="LIKES">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="POST_ID" type="NUMBER(19, 0)"/>
+            <column name="USER_ID" type="NUMBER(19, 0)"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </createTable>
+        <createTable tableName="FRIENDSHIPS">
+            <column name="USER_ID1" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID2" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </createTable>
+        <createTable tableName="GROUPS">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="GROUP_NAME" type="VARCHAR(255 CHAR)"/>
+            <column name="FIRST_NAME" type="VARCHAR(255 CHAR)"/>
+            <column name="LAST_NAME" type="VARCHAR(255 CHAR)"/>
+            <column name="PHONE" type="VARCHAR(255 CHAR)"/>
+        </createTable>
+        <createTable tableName="FOOTBALL_GROUPS">
+            <column name="FOOTBALL_GROUP_ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="FOOTBALL_SKILL" type="NUMBER(19, 0)"/>
+        </createTable>
+        <createTable tableName="VOLLEYBALL_GROUPS">
+            <column name="VOLLEYBALL_GROUP_ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VOLLEYBALL_SKILL" type="NUMBER(19, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="create-tables-task-2">
+        <createTable tableName="EMPLOYEES">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="STREET" type="VARCHAR2(255 CHAR)"/>
+            <column name="HOUSE" type="VARCHAR(255 CHAR)"/>
+            <column name="FLAT" type="NUMBER(19, 0)"/>
+            <column name="EMPLOYEE_STATUS" type="VARCHAR(255 CHAR)"/>
+            <column name="UNIT_ID" type="NUMBER(19, 0)"/>
+            <column name="EXTERNAL" type="NUMBER(1, 0)"/>
+        </createTable>
+        <createTable tableName="EMPLOYEE_PROJECT">
+            <column name="EMPLOYEE_ID" type="NUMBER(19, 0)"/>
+            <column name="PROJECT_ID" type="NUMBER(19, 0)"/>
+        </createTable>
+        <createTable tableName="PROJECTS">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255 CHAR)"/>
+        </createTable>
+        <createTable tableName="UNITS">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255 CHAR)"/>
+            <column name="EMAIL" type="VARCHAR2(255 CHAR)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

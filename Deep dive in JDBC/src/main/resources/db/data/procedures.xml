@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Vladislav_Zhelezov" id="create-procedure-most-popular-posts">
+        <sql>
+            CREATE OR REPLACE PROCEDURE JAVA_MENTORING.getMostPopularPost(
+            P_ID OUT NUMBER,
+            P_USER_ID OUT NUMBER,
+            P_TEXT OUT VARCHAR2,
+            P_TIMESTAMP OUT TIMESTAMP,
+            P_LIKES_COUNT OUT NUMBER)
+            AS
+            BEGIN
+            SELECT POSTS.ID, POSTS.USER_ID, POSTS.TEXT, POSTS.TIMESTAMP, COUNT(LIKES.USER_ID) AS likes_count INTO P_ID, P_USER_ID, P_TEXT, P_TIMESTAMP, P_LIKES_COUNT FROM POSTS
+            INNER JOIN LIKES ON POSTS.ID = LIKES.POST_ID
+            GROUP BY POSTS.ID, POSTS.USER_ID, POSTS.TEXT, POSTS.TIMESTAMP ORDER BY likes_count DESC FETCH FIRST 1 ROWS ONLY;
+            END;
+        </sql>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="create-procedure-most-popular-users-by-likes">
+        <sql>
+            CREATE OR REPLACE PROCEDURE JAVA_MENTORING.getMostPopularUserByLikes(
+            P_ID OUT NUMBER,
+            P_NAME OUT VARCHAR2,
+            P_SURNAME OUT VARCHAR2,
+            P_BIRTH_DATE OUT DATE)
+            AS
+            BEGIN
+            SELECT u.ID, u.NAME, u.SURNAME, u.BIRTH_DATE INTO P_ID, P_NAME, P_SURNAME, P_BIRTH_DATE FROM USERS u WHERE u.ID IN (SELECT USER_ID FROM (
+            SELECT DISTINCT POSTS.USER_ID, COUNT(LIKES.USER_ID) AS likes_count FROM POSTS
+            INNER JOIN LIKES ON POSTS.ID = LIKES.POST_ID
+            WHERE LIKES.TIMESTAMP BETWEEN TO_DATE('2025-03-01','RRRR-MM-DD')
+            AND TO_DATE('2025-09-01','RRRR-MM-DD')
+            GROUP BY POSTS.USER_ID)
+            WHERE likes_count > 100) AND
+            u.ID IN (SELECT ID FROM( SELECT DISTINCT ID, COUNT(ID) AS friendships_count FROM
+            (SELECT * FROM USERS u INNER JOIN FRIENDSHIPS ON u.ID IN
+            (FRIENDSHIPS.USER_ID1, FRIENDSHIPS.USER_ID2)) GROUP BY ID) WHERE friendships_count > 100) FETCH FIRST 1 ROWS ONLY;
+            END;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

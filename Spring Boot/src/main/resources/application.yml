@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    include:
+      - default
+---
+
+spring:
+  profiles: production
+---
+spring:
+  profiles: debug
+logging:
+  level:
+    com.epam.java.training.spring_boot.task1: DEBUG

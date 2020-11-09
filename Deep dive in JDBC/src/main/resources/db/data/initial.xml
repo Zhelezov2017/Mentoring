@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Vladislav_Zhelezov" id="create-tables">
+        <createTable tableName="USERS">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255 CHAR)"/>
+            <column name="SURNAME" type="VARCHAR(255 CHAR)"/>
+            <column name="BIRTH_DATE" type="DATE"/>
+        </createTable>
+        <createTable tableName="POSTS">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USER_ID" type="NUMBER(19, 0)"/>
+            <column name="TEXT" type="VARCHAR(255 CHAR)"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </createTable>
+        <createTable tableName="LIKES">
+            <column name="POST_ID" type="NUMBER(19, 0)"/>
+            <column name="USER_ID" type="NUMBER(19, 0)"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </createTable>
+        <createTable tableName="FRIENDSHIPS">
+            <column name="USER_ID1" type="NUMBER(19, 0)"/>
+            <column name="USER_ID2" type="NUMBER(19, 0)"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <!-- Init data -->
+    <changeSet author="Vladislav_Zhelezov" id="insert_users">
+        <loadData tableName="USERS"
+                  relativeToChangelogFile="true" file="csvfiles/Users.csv" quotchar="'">
+            <column name="ID" type="NUMERIC"/>
+            <column name="NAME" type="STRING"/>
+            <column name="SURNAME" type="STRING"/>
+            <column name="BIRTH_DATE" type="DATE"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="insert_posts">
+        <loadData tableName="POSTS"
+                  relativeToChangelogFile="true" file="csvfiles/Posts.csv" quotchar="'">
+            <column name="ID" type="NUMERIC"/>
+            <column name="USER_ID" type="NUMERIC"/>
+            <column name="TEXT" type="STRING"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="insert_friendships_1">
+        <loadData tableName="FRIENDSHIPS"
+                  relativeToChangelogFile="true" file="csvfiles/FriendshipsFirstPart.csv" quotchar="'">
+            <column name="USER_ID1" type="NUMERIC"/>
+            <column name="USER_ID2" type="NUMERIC"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="insert_friendships_2">
+        <loadData tableName="FRIENDSHIPS"
+                  relativeToChangelogFile="true" file="csvfiles/FriendshipsSecondPart.csv" quotchar="'">
+            <column name="USER_ID1" type="NUMERIC"/>
+            <column name="USER_ID2" type="NUMERIC"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="insert_likes_1">
+        <loadData tableName="LIKES"
+                  relativeToChangelogFile="true" file="csvfiles/LikesFirstPart.csv" quotchar="'">
+            <column name="POST_ID" type="NUMERIC"/>
+            <column name="USER_ID" type="NUMERIC"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="insert_likes_2">
+        <loadData tableName="LIKES"
+                  relativeToChangelogFile="true" file="csvfiles/LikesSecondPart.csv" quotchar="'">
+            <column name="POST_ID" type="NUMERIC"/>
+            <column name="USER_ID" type="NUMERIC"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="insert_likes_3">
+        <loadData tableName="LIKES"
+                  relativeToChangelogFile="true" file="csvfiles/LikesThirdPart.csv" quotchar="'">
+            <column name="POST_ID" type="NUMERIC"/>
+            <column name="USER_ID" type="NUMERIC"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="insert_likes_4">
+        <loadData tableName="LIKES"
+                  relativeToChangelogFile="true" file="csvfiles/LikesFourthPart.csv" quotchar="'">
+            <column name="POST_ID" type="NUMERIC"/>
+            <column name="USER_ID" type="NUMERIC"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="insert_likes_5">
+        <loadData tableName="LIKES"
+                  relativeToChangelogFile="true" file="csvfiles/LikesFifthPart.csv" quotchar="'">
+            <column name="POST_ID" type="NUMERIC"/>
+            <column name="USER_ID" type="NUMERIC"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Vladislav_Zhelezov" id="insert_likes_6">
+        <loadData tableName="LIKES"
+                  relativeToChangelogFile="true" file="csvfiles/LikesSixthPart.csv" quotchar="'">
+            <column name="POST_ID" type="NUMERIC"/>
+            <column name="USER_ID" type="NUMERIC"/>
+            <column name="TIMESTAMP" type="TIMESTAMP"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestAll">
+    <test name="integer" parallel="methods" thread-count="4">
+        <groups>
+            <run>
+                <exclude name="Double Value"/>
+                <include name="Integer Value"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="com.epam.java.training.junit.junit4.task6.positive.CalculatorPositiveTest"/>
+            <class name="com.epam.java.training.junit.junit4.task6.negative.CalculatorNegativeTest"/>
+        </classes>
+    </test>
+</suite>
